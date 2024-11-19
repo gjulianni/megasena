@@ -1,12 +1,14 @@
-import React from "react";
-import { LotteryProvider } from "./contexts/LotteryContext"; 
-import Home from "./pages/Home"; 
+import { BrowserRouter } from "react-router-dom"; 
+import LotteryRoute from './routes';  
+import { LotteryProvider } from './contexts/LotteryContext';  
 
 const App = () => {
   return (
-    <LotteryProvider> 
-      <Home /> 
-    </LotteryProvider>
+    <BrowserRouter>
+      <LotteryProvider>
+        <LotteryRoute />
+      </LotteryProvider>
+    </BrowserRouter>
   );
 };
 

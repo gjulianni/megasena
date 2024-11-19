@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { LotteryContext } from "../contexts/LotteryContext";
 import styled from "styled-components";
+import Nav from "../components/Menu";
 
 // Container para centralizar o painel na tela
 const Container = styled.div`
@@ -43,26 +44,39 @@ const Dezenas = styled.div`
   text-align: center;
 `;
 
-const Home = () => {
-  const { megasena } = useContext(LotteryContext);
+const DataContainer = styled.div`
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+`;
 
-  // Se não há dados ainda (carregando), exibe "Carregando..."
-  if (!megasena) {
-    return <div>Carregando...</div>;
+const Megasena = () => {
+  const { loteria } = useContext(LotteryContext); 
+
+  if (!loteria) {
+    return <div>Carregando...</div>; 
   }
 
   return (
-    <Container>
-      <Panel>
-        <h1>Dezenas do Último Concurso</h1>
-        <DezenasContainer>
-          {megasena.dezenas.map((dezena, index) => (
-            <Dezenas key={index}>{dezena}</Dezenas>
-          ))}
-        </DezenasContainer>
-      </Panel>
-    </Container>
+    <>
+      <Nav />
+      <Container>
+        <Panel>
+          <h1>Dezenas do Último Concurso - {loteria.tipoJogo}</h1>
+          <DezenasContainer>
+            {loteria.dezenas.map((dezena, index) => (
+              <Dezenas key={index}>{dezena}</Dezenas>
+            ))}
+          </DezenasContainer>
+
+          {/* Exibindo a data por extenso */}
+          <DataContainer>
+            <p>{loteria.dataPorExtenso}</p>
+          </DataContainer>
+        </Panel>
+      </Container>
+    </>
   );
 };
 
-export default Home;
+export default Megasena;
